@@ -1,0 +1,88 @@
+test:
+Load * Inline
+[
+ordem, people
+3, marcos
+2, jose
+4, maria
+1, joão
+3, ana
+2, joaquim
+1, marta
+4, ex_dojo08
+];
+
+
+NoConcatenate
+
+test1:
+Load distinct
+'OSUser() = '& Chr(39)&'UserDirectory=diretorio; UserId='&people&chr(39) as diretorio
+Resident test where ordem = 1;
+
+NoConcatenate
+
+test2:
+Load distinct
+'OSUser() = '& Chr(39)&'UserDirectory=EMBRACO; UserId='&people&chr(39) as diretorio
+Resident test where ordem = 2;
+
+NoConcatenate
+
+test3:
+Load distinct
+'OSUser() = '& Chr(39)&'UserDirectory=diretorio; UserId='&people&chr(39) as diretorio
+Resident test where ordem = 3;
+
+NoConcatenate
+
+test4:
+Load distinct
+'OSUser() = '& Chr(39)&'UserDirectory=EMBRACO; UserId='&people&chr(39) as diretorio
+Resident test where ordem = 4;
+
+NoConcatenate
+
+dir1:
+Load distinct 
+Concat(diretorio, ' or ') as diretorio
+Resident test1; drop table test1;
+
+Let vDir1 = Peek('diretorio', 0, 'dir1');
+
+Trace $(vDir1);
+
+NoConcatenate
+
+dir2:
+Load distinct 
+Concat(diretorio, ' or ') as diretorio
+Resident test2; drop table test2;
+
+Let vDir2 = Peek('diretorio', 0, 'dir2');
+
+Trace $(vDir2);
+
+NoConcatenate
+
+dir3:
+Load distinct 
+Concat(diretorio, ' or ') as diretorio
+Resident test3; drop table test3;
+
+Let vDir3 = Peek('diretorio', 0, 'dir3');
+
+Trace $(vDir3);
+
+NoConcatenate
+
+dir4:
+Load distinct 
+Concat(diretorio, ' or ') as diretorio
+Resident test4; drop table test, test4;
+
+Let vDir4 = Peek('diretorio', 0, 'dir4');
+
+Trace $(vDir4);
+
+exit Script;
